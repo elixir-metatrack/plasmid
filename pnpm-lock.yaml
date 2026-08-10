@@ -93,6 +93,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: 1.0.0
         version: 1.0.0
+      csv-parse:
+        specifier: ^7.0.2
+        version: 7.0.2
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -102,6 +105,9 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.3.3
+      tsx:
+        specifier: ^4.23.11
+        version: 4.23.11
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -1673,6 +1679,9 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
+  csv-parse@7.0.2:
+    resolution: {integrity: sha512-uKZghv9UmPkMVLYy//KZ9HFAIJsl7wkhoEdIL0+rhuSY9pZQlhaeGEDPIe+/w7eh81MOql8Q/9+inAGWG6ZHYA==}
+
   dayjs@1.11.21:
     resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
@@ -2815,8 +2824,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  tsx@4.23.6:
-    resolution: {integrity: sha512-D/YYGUDqKlLvXhM5fBBbiENaGICxLfU4viHnZEkgmgplnDFa+Kczy34VV7AmLJgdzisv0I/J3zitfC26JH3GXg==}
+  tsx@4.23.11:
+    resolution: {integrity: sha512-Ry2oTEUnhBdeEdWIztY8kf3/nBGnPnjMLVGL0YfdRXMORuPER5NlKmayqxtxRxwB1xBN+RivRaJfe7PM1rtiyw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -4150,6 +4159,8 @@ snapshots:
 
   csstype@3.2.3: {}
 
+  csv-parse@7.0.2: {}
+
   dayjs@1.11.21: {}
 
   debounce-fn@4.0.0:
@@ -4194,7 +4205,7 @@ snapshots:
       '@drizzle-team/brocli': 0.10.2
       '@esbuild-kit/esm-loader': 2.6.5
       esbuild: 0.25.12
-      tsx: 4.23.6
+      tsx: 4.23.11
 
   drizzle-orm@0.45.2(@neondatabase/serverless@1.1.0)(kysely@0.29.4):
     optionalDependencies:
@@ -5221,7 +5232,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsx@4.23.6:
+  tsx@4.23.11:
     dependencies:
       esbuild: 0.28.1
     optionalDependencies:
