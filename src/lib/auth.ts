@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { admin } from "better-auth/plugins/admin";
 
 import { db } from "@/db";
 import { sendEmail } from "@/lib/email";
@@ -17,6 +18,7 @@ export const auth = betterAuth({
     },
     revokeSessionsOnPasswordReset: true,
   },
+  plugins: [admin()],
 });
 
 export type Session = typeof auth.$Infer.Session;
