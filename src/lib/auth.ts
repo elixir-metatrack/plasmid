@@ -6,6 +6,10 @@ import { db } from "@/db";
 import { sendEmail } from "@/lib/email";
 
 export const auth = betterAuth({
+  baseURL: {
+    allowedHosts: ["*.vercel.app", "*.metatrack.no"],
+    protocol: "https",
+  },
   database: drizzleAdapter(db, { provider: "pg" }),
   emailAndPassword: {
     enabled: true,
