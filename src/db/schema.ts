@@ -10,5 +10,4 @@
 //   createdAt: timestamp("created_at").defaultNow().notNull(),
 // });
 
-// Placeholder export so this file is a module until tables are added.
-export {};
+export * from "./auth-schema";
