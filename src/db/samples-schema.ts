@@ -16,6 +16,7 @@ export const samples = pgTable("samples", {
   latitudeUnit: text("latitude_unit"),
   longitude: doublePrecision("longitude"),
   longitudeUnit: text("longitude_unit"),
+  physicalCoordinates: text("physical_coordinates"),
   countryCode: text("country_code"),
   higherGeography: text("higher_geography"),
   elevation: doublePrecision("elevation"),
@@ -49,6 +50,7 @@ export const samples = pgTable("samples", {
   associatedReferences: text("associated_references"),
   occurrenceRemarks: text("occurrence_remarks"),
   eventRemarks: text("event_remarks"),
+  source: text("source"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
