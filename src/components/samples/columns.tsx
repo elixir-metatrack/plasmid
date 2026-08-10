@@ -6,6 +6,7 @@ import {
   UnfoldMoreIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import type { CellContext } from "@tanstack/react-table";
 import {
   columnFilteringFeature,
   columnVisibilityFeature,
@@ -18,9 +19,13 @@ import {
   rowSortingFeature,
   tableFeatures,
 } from "@tanstack/react-table";
+import type { ReactNode } from "react";
 
+import { EditableCell } from "@/components/samples/editable-cell";
+import { RowActions } from "@/components/samples/row-actions";
 import { Button } from "@/components/ui/button";
 import type { samples } from "@/db/samples-schema";
+import { SAMPLE_FIELDS, type SampleField } from "@/lib/samples-validation";
 
 export type Sample = typeof samples.$inferSelect;
 
@@ -119,157 +124,221 @@ export const DEFAULT_HIDDEN_COLUMNS = [
   "updatedAt",
 ] as const;
 
-export const columns = helper.columns([
-  // Key subset (visible by default)
-  helper.accessor("alias", {
-    header: sortableHeader("Alias"),
-    cell: (info) => <span className="font-medium">{info.getValue()}</span>,
-  }),
-  helper.accessor("locality", {
-    header: sortableHeader("Locality"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("countryCode", {
-    header: sortableHeader("Country"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("latitude", {
-    header: sortableHeader("Latitude"),
-    cell: (info) => formatNumber(info.getValue()),
-  }),
-  helper.accessor("longitude", {
-    header: sortableHeader("Longitude"),
-    cell: (info) => formatNumber(info.getValue()),
-  }),
-  helper.accessor("collectionDate", {
-    header: sortableHeader("Collection date"),
-    cell: (info) => formatDate(info.getValue()),
-  }),
-  helper.accessor("projectName", {
-    header: sortableHeader("Project"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("custodian", {
-    header: sortableHeader("Custodian"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("age", {
-    header: sortableHeader("Age"),
-    cell: (info) => formatNumber(info.getValue(), info.row.original.ageUnit),
-  }),
-  // Remaining fields (hidden by default)
-  helper.accessor("description", {
-    header: sortableHeader("Description"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("latitudeUnit", {
-    header: sortableHeader("Latitude unit"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("longitudeUnit", {
-    header: sortableHeader("Longitude unit"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("physicalCoordinates", {
-    header: sortableHeader("Physical coordinates"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("higherGeography", {
-    header: sortableHeader("Higher geography"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("elevation", {
-    header: sortableHeader("Elevation"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.elevationUnit),
-  }),
-  helper.accessor("depth", {
-    header: sortableHeader("Depth"),
-    cell: (info) => formatNumber(info.getValue(), info.row.original.depthUnit),
-  }),
-  helper.accessor("samplingProtocol", {
-    header: sortableHeader("Sampling protocol"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("preparationType", {
-    header: sortableHeader("Preparation type"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("coreLength", {
-    header: sortableHeader("Core length"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.coreLengthUnit),
-  }),
-  helper.accessor("storageLocation", {
-    header: sortableHeader("Storage location"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("collectedBy", {
-    header: sortableHeader("Collected by"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("eventId", {
-    header: sortableHeader("Event ID"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("recordedBy", {
-    header: sortableHeader("Recorded by"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("institutionCode", {
-    header: sortableHeader("Institution code"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("ownerInstitutionCode", {
-    header: sortableHeader("Owner institution code"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("ageUncertainty", {
-    header: sortableHeader("Age uncertainty"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.ageUncertaintyUnit),
-  }),
-  helper.accessor("basalAge14CBP", {
-    header: sortableHeader("Basal age (14C BP)"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.basalAge14CBPUnit),
-  }),
-  helper.accessor("basalAgeCalBP", {
-    header: sortableHeader("Basal age (cal BP)"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.basalAgeCalBPUnit),
-  }),
-  helper.accessor("oldestSampleAgeCalBP", {
-    header: sortableHeader("Oldest sample age (cal BP)"),
-    cell: (info) =>
-      formatNumber(info.getValue(), info.row.original.oldestSampleAgeCalBPUnit),
-  }),
-  helper.accessor("bibliographicCitation", {
-    header: sortableHeader("Bibliographic citation"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("associatedReferences", {
-    header: sortableHeader("Associated references"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("occurrenceRemarks", {
-    header: sortableHeader("Occurrence remarks"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("eventRemarks", {
-    header: sortableHeader("Event remarks"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("source", {
-    header: sortableHeader("Source"),
-    cell: (info) => formatText(info.getValue()),
-  }),
-  helper.accessor("createdAt", {
-    header: sortableHeader("Created at"),
-    cell: (info) => formatDate(info.getValue()),
-  }),
-  helper.accessor("updatedAt", {
-    header: sortableHeader("Updated at"),
-    cell: (info) => formatDate(info.getValue()),
-  }),
-]);
+export function buildColumns({
+  editable = false,
+  onEdit,
+}: {
+  editable?: boolean;
+  onEdit?: (sample: Sample) => void;
+} = {}) {
+  const baseColumns = [
+    // Key subset (visible by default)
+    helper.accessor("alias", {
+      header: sortableHeader("Alias"),
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>,
+    }),
+    helper.accessor("locality", {
+      header: sortableHeader("Locality"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("countryCode", {
+      header: sortableHeader("Country"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("latitude", {
+      header: sortableHeader("Latitude"),
+      cell: (info) => formatNumber(info.getValue()),
+    }),
+    helper.accessor("longitude", {
+      header: sortableHeader("Longitude"),
+      cell: (info) => formatNumber(info.getValue()),
+    }),
+    helper.accessor("collectionDate", {
+      header: sortableHeader("Collection date"),
+      cell: (info) => formatDate(info.getValue()),
+    }),
+    helper.accessor("projectName", {
+      header: sortableHeader("Project"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("custodian", {
+      header: sortableHeader("Custodian"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("age", {
+      header: sortableHeader("Age"),
+      cell: (info) => formatNumber(info.getValue(), info.row.original.ageUnit),
+    }),
+    // Remaining fields (hidden by default)
+    helper.accessor("description", {
+      header: sortableHeader("Description"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("latitudeUnit", {
+      header: sortableHeader("Latitude unit"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("longitudeUnit", {
+      header: sortableHeader("Longitude unit"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("physicalCoordinates", {
+      header: sortableHeader("Physical coordinates"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("higherGeography", {
+      header: sortableHeader("Higher geography"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("elevation", {
+      header: sortableHeader("Elevation"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.elevationUnit),
+    }),
+    helper.accessor("depth", {
+      header: sortableHeader("Depth"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.depthUnit),
+    }),
+    helper.accessor("samplingProtocol", {
+      header: sortableHeader("Sampling protocol"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("preparationType", {
+      header: sortableHeader("Preparation type"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("coreLength", {
+      header: sortableHeader("Core length"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.coreLengthUnit),
+    }),
+    helper.accessor("storageLocation", {
+      header: sortableHeader("Storage location"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("collectedBy", {
+      header: sortableHeader("Collected by"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("eventId", {
+      header: sortableHeader("Event ID"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("recordedBy", {
+      header: sortableHeader("Recorded by"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("institutionCode", {
+      header: sortableHeader("Institution code"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("ownerInstitutionCode", {
+      header: sortableHeader("Owner institution code"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("ageUncertainty", {
+      header: sortableHeader("Age uncertainty"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.ageUncertaintyUnit),
+    }),
+    helper.accessor("basalAge14CBP", {
+      header: sortableHeader("Basal age (14C BP)"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.basalAge14CBPUnit),
+    }),
+    helper.accessor("basalAgeCalBP", {
+      header: sortableHeader("Basal age (cal BP)"),
+      cell: (info) =>
+        formatNumber(info.getValue(), info.row.original.basalAgeCalBPUnit),
+    }),
+    helper.accessor("oldestSampleAgeCalBP", {
+      header: sortableHeader("Oldest sample age (cal BP)"),
+      cell: (info) =>
+        formatNumber(
+          info.getValue(),
+          info.row.original.oldestSampleAgeCalBPUnit,
+        ),
+    }),
+    helper.accessor("bibliographicCitation", {
+      header: sortableHeader("Bibliographic citation"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("associatedReferences", {
+      header: sortableHeader("Associated references"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("occurrenceRemarks", {
+      header: sortableHeader("Occurrence remarks"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("eventRemarks", {
+      header: sortableHeader("Event remarks"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("source", {
+      header: sortableHeader("Source"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("createdAt", {
+      header: sortableHeader("Created at"),
+      cell: (info) => formatDate(info.getValue()),
+    }),
+    helper.accessor("updatedAt", {
+      header: sortableHeader("Updated at"),
+      cell: (info) => formatDate(info.getValue()),
+    }),
+  ];
+
+  if (!editable) {
+    return helper.columns(baseColumns);
+  }
+
+  const editableFieldIds = new Set<string>(SAMPLE_FIELDS);
+
+  const editableColumns = baseColumns.map((column) => {
+    const accessorKey =
+      "accessorKey" in column ? String(column.accessorKey) : undefined;
+    if (!accessorKey || !editableFieldIds.has(accessorKey)) {
+      return column;
+    }
+    const originalCell = column.cell as
+      | ((info: CellContext<typeof features, Sample, unknown>) => ReactNode)
+      | ReactNode
+      | undefined;
+    const editableCell = (
+      info: CellContext<typeof features, Sample, unknown>,
+    ) => (
+      <EditableCell
+        sample={info.row.original}
+        field={accessorKey as SampleField}
+        display={
+          typeof originalCell === "function"
+            ? originalCell(info)
+            : (originalCell ?? null)
+        }
+      />
+    );
+    return {
+      ...column,
+      cell: editableCell as typeof column.cell,
+    };
+  });
+
+  return helper.columns([
+    ...editableColumns,
+    helper.display({
+      id: "actions",
+      enableHiding: false,
+      header: () => <span className="sr-only">Actions</span>,
+      cell: (info) => (
+        <RowActions
+          sample={info.row.original}
+          onEdit={(sample) => onEdit?.(sample)}
+        />
+      ),
+    }),
+  ]);
+}
+
+export const columns = buildColumns();

@@ -16,6 +16,7 @@ export default async function DashboardPage() {
     redirect("/sign-in");
   }
 
+  const isAdmin = session.user.role === "admin";
   const rows = await db.select().from(samples).orderBy(samples.alias);
 
   return (
@@ -27,7 +28,7 @@ export default async function DashboardPage() {
       <p className="text-muted-foreground">
         Signed in as <span className="font-medium">{session.user.email}</span>
       </p>
-      <SamplesTable data={rows} />
+      <SamplesTable data={rows} isAdmin={isAdmin} />
     </main>
   );
 }

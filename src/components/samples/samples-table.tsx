@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Add01Icon,
   ArrowLeft01Icon,
   ArrowRight01Icon,
   Columns3,
@@ -13,14 +14,15 @@ import type {
   SortingState,
 } from "@tanstack/react-table";
 import { filterFn_includesString, useTable } from "@tanstack/react-table";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
-  columns,
+  buildColumns,
   DEFAULT_HIDDEN_COLUMNS,
   features,
   type Sample,
 } from "@/components/samples/columns";
+import { SampleFormSheet } from "@/components/samples/sample-form-sheet";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -61,8 +63,18 @@ function columnLabel(columnId: string) {
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
-export function SamplesTable({ data }: { data: Sample[] }) {
+export function SamplesTable({
+  data,
+  isAdmin = false,
+}: {
+  data: Sample[];
+  isAdmin?: boolean;
+}) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [editingSample, setEditingSample] = useState<Sample | "new" | null>(
+    null,
+  );
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnVisibility, setColumnVisibility] =
     useState<ColumnVisibilityState>(INITIAL_COLUMN_VISIBILITY);
@@ -70,6 +82,18 @@ export function SamplesTable({ data }: { data: Sample[] }) {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const columns = useMemo(
+    () =>
+      buildColumns({
+        editable: isAdmin,
+        onEdit: (sample) => {
+          setEditingSample(sample);
+          setSheetOpen(true);
+        },
+      }),
+    [isAdmin],
+  );
 
   const table = useTable({
     features,
@@ -88,6 +112,18 @@ export function SamplesTable({ data }: { data: Sample[] }) {
 
   return (
     <div className="flex flex-col gap-4">
+      {isAdmin && (
+        <SampleFormSheet
+          key={
+            editingSample === "new" || editingSample === null
+              ? "new"
+              : editingSample.id
+          }
+          sample={editingSample === "new" ? null : editingSample}
+          open={sheetOpen}
+          onOpenChange={setSheetOpen}
+        />
+      )}
       <div className="flex items-center justify-between gap-2">
         <div className="relative w-full max-w-sm">
           <HugeiconsIcon
@@ -105,41 +141,58 @@ export function SamplesTable({ data }: { data: Sample[] }) {
             className="pl-8"
           />
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button variant="outline">
-                <HugeiconsIcon
-                  icon={Columns3}
-                  strokeWidth={2}
-                  data-icon="inline-start"
-                />
-                Columns
-              </Button>
-            }
-          />
-          <DropdownMenuContent
-            align="end"
-            className="max-h-96 w-56 overflow-y-auto"
-          >
-            <DropdownMenuGroup>
-              {table
-                .getAllLeafColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(checked) =>
-                      column.toggleVisibility(checked)
-                    }
-                  >
-                    {columnLabel(column.id)}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-2">
+          {isAdmin && (
+            <Button
+              onClick={() => {
+                setEditingSample("new");
+                setSheetOpen(true);
+              }}
+            >
+              <HugeiconsIcon
+                icon={Add01Icon}
+                strokeWidth={2}
+                data-icon="inline-start"
+              />
+              Add sample
+            </Button>
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <Button variant="outline">
+                  <HugeiconsIcon
+                    icon={Columns3}
+                    strokeWidth={2}
+                    data-icon="inline-start"
+                  />
+                  Columns
+                </Button>
+              }
+            />
+            <DropdownMenuContent
+              align="end"
+              className="max-h-96 w-56 overflow-y-auto"
+            >
+              <DropdownMenuGroup>
+                {table
+                  .getAllLeafColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(checked) =>
+                        column.toggleVisibility(checked)
+                      }
+                    >
+                      {columnLabel(column.id)}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="overflow-x-auto rounded-lg border">
         <Table>
