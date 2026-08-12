@@ -13,6 +13,7 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg" }),
   emailAndPassword: {
     enabled: true,
+    disableSignUp: true,
     sendResetPassword: async ({ user, url }) => {
       await sendEmail({
         to: user.email,

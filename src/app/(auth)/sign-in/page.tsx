@@ -127,12 +127,6 @@ export default function SignInPage() {
                 </Button>
               )}
             </form.Subscribe>
-            <p className="text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
-              <Link href="/sign-up" className="underline underline-offset-4">
-                Sign up
-              </Link>
-            </p>
           </FieldGroup>
         </form>
       </CardContent>
