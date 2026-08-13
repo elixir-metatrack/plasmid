@@ -3,7 +3,6 @@ import { resolve } from "node:path";
 import { neon } from "@neondatabase/serverless";
 import { parse } from "csv-parse/sync";
 import { config } from "dotenv";
-import { sql as drizzleSql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-http";
 import { samples } from "./samples-schema";
 
@@ -121,56 +120,19 @@ async function main() {
   const batchSize = 100;
   let upserted = 0;
 
+  await db.delete(samples);
+  console.log("Removed existing samples.");
+
   for (let i = 0; i < records.length; i += batchSize) {
     const batch = records.slice(i, i + batchSize);
-    await db
-      .insert(samples)
-      .values(batch)
-      .onConflictDoUpdate({
-        target: samples.alias,
-        set: {
-          locality: sqlExcluded("locality"),
-          description: sqlExcluded("description"),
-          latitude: sqlExcluded("latitude"),
-          latitudeUnit: sqlExcluded("latitude_unit"),
-          longitude: sqlExcluded("longitude"),
-          longitudeUnit: sqlExcluded("longitude_unit"),
-          physicalCoordinates: sqlExcluded("physical_coordinates"),
-          countryCode: sqlExcluded("country_code"),
-          higherGeography: sqlExcluded("higher_geography"),
-          elevation: sqlExcluded("elevation"),
-          depth: sqlExcluded("depth"),
-          collectionDate: sqlExcluded("collection_date"),
-          projectName: sqlExcluded("project_name"),
-          samplingProtocol: sqlExcluded("sampling_protocol"),
-          preparationType: sqlExcluded("preparation_type"),
-          coreLength: sqlExcluded("core_length"),
-          storageLocation: sqlExcluded("storage_location"),
-          custodian: sqlExcluded("custodian"),
-          collectedBy: sqlExcluded("collected_by"),
-          eventId: sqlExcluded("event_id"),
-          recordedBy: sqlExcluded("recorded_by"),
-          institutionCode: sqlExcluded("institution_code"),
-          ownerInstitutionCode: sqlExcluded("owner_institution_code"),
-          age: sqlExcluded("age"),
-          ageUncertainty: sqlExcluded("age_uncertainty"),
-          basalAge14CBP: sqlExcluded('"basal_age_14C_BP"'),
-          basalAgeCalBP: sqlExcluded('"basal_age_cal_BP"'),
-          oldestSampleAgeCalBP: sqlExcluded('"oldest_sample_age_cal_BP"'),
-          bibliographicCitation: sqlExcluded("bibliographic_citation"),
-          associatedReferences: sqlExcluded("associated_references"),
-          occurrenceRemarks: sqlExcluded("occurrence_remarks"),
-          eventRemarks: sqlExcluded("event_remarks"),
-          source: sqlExcluded("source"),
-        },
-      });
+    await db.insert(samples).values(batch);
     upserted += batch.length;
-    console.log(`Upserted ${upserted}/${records.length} rows...`);
+    console.log(`Inserted ${upserted}/${records.length} rows...`);
   }
 
   console.log("\n--- Seed summary ---");
   console.log(`Total data rows processed: ${dataRows.length}`);
-  console.log(`Upserted: ${upserted}`);
+  console.log(`Inserted: ${upserted}`);
   console.log(`Skipped: ${skipped.length}`);
   for (const s of skipped) {
     console.log(
@@ -182,10 +144,6 @@ async function main() {
       `Duplicate aliases in CSV (last occurrence wins): ${duplicates.join(", ")}`,
     );
   }
-}
-
-function sqlExcluded(column: string) {
-  return drizzleSql.raw(`excluded.${column}`);
 }
 
 main()
