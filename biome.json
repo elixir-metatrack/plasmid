@@ -15,7 +15,7 @@
       "!build",
       "!.agents",
       "!.junie",
-      "!map.tsx"
+      "!src/components/ui/map.tsx"
     ]
   },
   "formatter": {
