@@ -78,6 +78,17 @@ A sample-management web application for geological core samples (sediment cores,
 | `pnpm db:studio` | Open Drizzle Studio |
 | `pnpm db:seed` | Seed the database from `sample_data.csv` |
 
+## Commits and Releases
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for changes merged into `main`:
+
+- `fix: correct sample depth validation` creates a patch release.
+- `feat: add sample export` creates a minor release.
+- Add `!` after the type or a `BREAKING CHANGE:` footer for a major release.
+- Commits such as `docs:`, `chore:`, and `refactor:` do not create a release by themselves.
+
+Release Please watches `main` and maintains a release pull request with the next version, generated `CHANGELOG.md` entries, and a synchronized `pnpm-lock.yaml`. After that pull request is reviewed and merged, GitHub Actions creates the `v*` tag and GitHub Release. Releases are published only to GitHub; this private application is not published as an npm package.
+
 ## Project Structure
 
 ```
