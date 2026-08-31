@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/release-please-config.json",
+  "release-type": "node",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "plasmid",
+      "changelog-path": "CHANGELOG.md"
+    }
+  },
+  "changelog-type": "github",
+  "include-v-in-tag": true
+}
