@@ -11,10 +11,11 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import type {
   ColumnVisibilityState,
   PaginationState,
+  RowSelectionState,
   SortingState,
 } from "@tanstack/react-table";
 import { filterFn_includesString, useTable } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   buildColumns,
@@ -48,6 +49,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useSampleSelectionStore } from "@/lib/sample-selection-store";
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 
@@ -82,6 +84,19 @@ export function SamplesTable({
     pageIndex: 0,
     pageSize: 10,
   });
+  const selectedSampleIds = useSampleSelectionStore(
+    (state) => state.selectedSampleIds,
+  );
+  const registerSamples = useSampleSelectionStore(
+    (state) => state.registerSamples,
+  );
+  const setSelectedSampleIds = useSampleSelectionStore(
+    (state) => state.setSelectedSampleIds,
+  );
+
+  useEffect(() => {
+    registerSamples(data);
+  }, [data, registerSamples]);
 
   const columns = useMemo(
     () =>
@@ -99,11 +114,25 @@ export function SamplesTable({
     features,
     columns,
     data,
-    state: { sorting, globalFilter, columnVisibility, pagination },
+    state: {
+      sorting,
+      globalFilter,
+      columnVisibility,
+      pagination,
+      rowSelection: selectedSampleIds satisfies RowSelectionState,
+    },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: setPagination,
+    onRowSelectionChange: (updater) => {
+      const currentSelection =
+        useSampleSelectionStore.getState().selectedSampleIds;
+      const nextSelection =
+        typeof updater === "function" ? updater(currentSelection) : updater;
+      setSelectedSampleIds(nextSelection);
+    },
+    getRowId: (row) => row.id,
     globalFilterFn: filterFn_includesString,
   });
 
