@@ -296,7 +296,18 @@ export function buildColumns({
   const selectionColumn = helper.display({
     id: "selection",
     enableHiding: false,
-    header: () => <span className="sr-only">Select sample</span>,
+    header: ({ table }) => (
+      <Checkbox
+        aria-label="Select all samples"
+        checked={table.getIsAllRowsSelected()}
+        indeterminate={
+          table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
+        }
+        onCheckedChange={() =>
+          table.toggleAllRowsSelected(!table.getIsAllRowsSelected())
+        }
+      />
+    ),
     cell: ({ row }) => (
       <Checkbox
         aria-label={`Select sample ${row.original.alias}`}

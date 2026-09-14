@@ -138,6 +138,10 @@ export function SamplesTable({
 
   const pageCount = table.getPageCount();
   const visibleColumnCount = table.getVisibleLeafColumns().length;
+  const selectedCount = Object.keys(selectedSampleIds).filter(
+    (id) => selectedSampleIds[id],
+  ).length;
+  const totalCount = data.length;
 
   return (
     <div className="flex flex-col gap-4">
@@ -153,7 +157,7 @@ export function SamplesTable({
           onOpenChange={setSheetOpen}
         />
       )}
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="relative w-full max-w-sm">
           <HugeiconsIcon
             icon={Search01Icon}
@@ -170,7 +174,28 @@ export function SamplesTable({
             className="pl-8"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {totalCount > 0 && (
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
+              {selectedCount} of {totalCount} selected
+            </span>
+          )}
+          {selectedCount < totalCount && (
+            <Button
+              variant="outline"
+              onClick={() => table.toggleAllRowsSelected(true)}
+            >
+              Select all
+            </Button>
+          )}
+          {selectedCount > 0 && (
+            <Button
+              variant="outline"
+              onClick={() => table.toggleAllRowsSelected(false)}
+            >
+              Deselect all
+            </Button>
+          )}
           {isAdmin && (
             <Button
               onClick={() => {

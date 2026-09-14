@@ -27,9 +27,18 @@ export function SampleLocationMap() {
               latitude={sample.latitude}
             >
               <MarkerContent>
-                <div className="bg-primary size-4 rounded-full border-2 border-white shadow-lg" />
+                <div className="relative flex size-7 items-center justify-center">
+                  <div className="bg-primary absolute top-4 size-3 rotate-45 rounded-xs shadow-sm" />
+                  <div className="bg-background relative flex size-6 items-center justify-center rounded-full border-2 border-primary shadow-md">
+                    <div className="bg-primary size-2.5 rounded-full ring-2 ring-primary/20" />
+                  </div>
+                </div>
               </MarkerContent>
-              <MarkerContent>{sample.alias}</MarkerContent>
+              <MarkerContent className="-mt-7 ml-9 max-w-44">
+                <div className="bg-background/95 text-foreground truncate rounded-md border border-border px-2 py-1 text-xs font-medium shadow-sm backdrop-blur-sm">
+                  {sample.alias}
+                </div>
+              </MarkerContent>
               <MarkerPopup>
                 <div className="space-y-1">
                   <p className="text-foreground font-medium">{sample.alias}</p>
