@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import Link from "next/link";
-
+import { SampleLocationMap } from "@/components/samples/sample-location-map";
 import { SamplesTable } from "@/components/samples/samples-table";
 import { SignOutButton } from "@/components/sign-out-button";
 import { Button } from "@/components/ui/button";
@@ -38,6 +38,7 @@ export default async function DashboardPage() {
         </p>
       )}
       <SamplesTable data={rows} isAdmin={isAdmin} />
+      <SampleLocationMap />
     </main>
   );
 }

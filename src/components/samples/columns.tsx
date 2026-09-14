@@ -16,6 +16,7 @@ import {
   createSortedRowModel,
   globalFilteringFeature,
   rowPaginationFeature,
+  rowSelectionFeature,
   rowSortingFeature,
   tableFeatures,
 } from "@tanstack/react-table";
@@ -24,6 +25,7 @@ import type { ReactNode } from "react";
 import { EditableCell } from "@/components/samples/editable-cell";
 import { RowActions } from "@/components/samples/row-actions";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { samples } from "@/db/samples-schema";
 import { SAMPLE_FIELDS, type SampleField } from "@/lib/samples-validation";
 
@@ -37,6 +39,7 @@ export const features = tableFeatures({
   filteredRowModel: createFilteredRowModel(),
   rowPaginationFeature,
   paginatedRowModel: createPaginatedRowModel(),
+  rowSelectionFeature,
   columnVisibilityFeature,
 });
 
@@ -290,8 +293,22 @@ export function buildColumns({
     }),
   ];
 
+  const selectionColumn = helper.display({
+    id: "selection",
+    enableHiding: false,
+    header: () => <span className="sr-only">Select sample</span>,
+    cell: ({ row }) => (
+      <Checkbox
+        aria-label={`Select sample ${row.original.alias}`}
+        checked={row.getIsSelected()}
+        disabled={!row.getCanSelect()}
+        onCheckedChange={() => row.toggleSelected()}
+      />
+    ),
+  });
+
   if (!editable) {
-    return helper.columns(baseColumns);
+    return helper.columns([selectionColumn, ...baseColumns]);
   }
 
   const editableFieldIds = new Set<string>(SAMPLE_FIELDS);
@@ -326,6 +343,7 @@ export function buildColumns({
   });
 
   return helper.columns([
+    selectionColumn,
     ...editableColumns,
     helper.display({
       id: "actions",
