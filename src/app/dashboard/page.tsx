@@ -37,8 +37,8 @@ export default async function DashboardPage() {
           Signed in as <span className="font-medium">{session.user.email}</span>
         </p>
       )}
-      <SamplesTable data={rows} isAdmin={isAdmin} />
       <SampleLocationMap />
+      <SamplesTable data={rows} isAdmin={isAdmin} />
     </main>
   );
 }
