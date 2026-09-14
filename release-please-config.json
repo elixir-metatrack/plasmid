@@ -8,6 +8,5 @@
       "changelog-path": "CHANGELOG.md"
     }
   },
-  "changelog-type": "github",
   "include-v-in-tag": true
 }
