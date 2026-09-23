@@ -1,0 +1,55 @@
+# Changelog
+
+## [0.2.0](https://github.com/elixir-metatrack/plasmid/compare/plasmid-v0.1.0...plasmid-v0.2.0) (2026-09-23)
+
+
+### Features
+
+* add `area` column to samples table with sorting ([e665697](https://github.com/elixir-metatrack/plasmid/commit/e665697acb1f08a1931a6cc6858a6bc401e1605d))
+* add `area` field to sample form sheet ([e643100](https://github.com/elixir-metatrack/plasmid/commit/e643100be226500133051cc7a7777a4b382523e1))
+* add `area` field to samples schema and validation files ([b9d1e8d](https://github.com/elixir-metatrack/plasmid/commit/b9d1e8dc168d8e8c144fe94391415a5aa97965f0))
+* add `samples` table schema ([e1dcce9](https://github.com/elixir-metatrack/plasmid/commit/e1dcce975464fb148ace0a2fea941cbab0708a4f))
+* add allowedHosts configuration for betterAuth ([5764538](https://github.com/elixir-metatrack/plasmid/commit/5764538ffc5ca8771609eef57d07eb49bdb44f63))
+* add and configure shadcn/ui ([f16a72b](https://github.com/elixir-metatrack/plasmid/commit/f16a72bb36042a28b59ab55ee8257255a11a4e2c))
+* add Checkbox component using @base-ui/react/checkbox integration ([38a246e](https://github.com/elixir-metatrack/plasmid/commit/38a246e6f4accdfcbd71f0c26570336bf713c9f6))
+* add Checkbox component using @base-ui/react/checkbox integration ([ab8a723](https://github.com/elixir-metatrack/plasmid/commit/ab8a7235f63bcb05d9494a22a6daf74890edd003))
+* add cluster-based sample rendering and optimize map data handling ([9a95cf0](https://github.com/elixir-metatrack/plasmid/commit/9a95cf0c1c92065c9e131f2928685c5db4ae409c))
+* add CRUD actions and UI components for managing `samples` ([a39755a](https://github.com/elixir-metatrack/plasmid/commit/a39755a0ae3a4f825cb749f250c575447697f81b))
+* add database seed script and sample data for `samples` table ([9b304e2](https://github.com/elixir-metatrack/plasmid/commit/9b304e24e1342f6543e175485b244f368cd02284))
+* add indeterminate state support to Checkbox component ([e62fc6f](https://github.com/elixir-metatrack/plasmid/commit/e62fc6fd21f821c5d09ac0ebf5c8228e79271a09))
+* add Map component from mapcn ([5853ff5](https://github.com/elixir-metatrack/plasmid/commit/5853ff56d25d47139acc5711770dca921f9d0ca8))
+* add Map component from mapcn ([9a1c7d9](https://github.com/elixir-metatrack/plasmid/commit/9a1c7d9fd6c3bc9162f4527a963b3d53b5977335))
+* add Navbar to layout and improve SignOutButton props handling ([e445f02](https://github.com/elixir-metatrack/plasmid/commit/e445f02185d361d7dedf421a6740d29cac453974))
+* add responsive Navbar with theme toggle and auth actions ([6cc8657](https://github.com/elixir-metatrack/plasmid/commit/6cc86576ca7bb99548d086ff60b6e97bfb2c6003))
+* add row selection support with Zustand store integration ([9afc920](https://github.com/elixir-metatrack/plasmid/commit/9afc9201f9f2fa925df75f52b0382ed440629be1))
+* add row selection support with Zustand store integration ([a7886fc](https://github.com/elixir-metatrack/plasmid/commit/a7886fceb45287f3a937848b1e9fb69dd88d2c8e))
+* add SampleLocationMap component with sample marker rendering ([5707acb](https://github.com/elixir-metatrack/plasmid/commit/5707acbd519b47608368e057dc0e5988583ff891))
+* add SampleLocationMap component with sample marker rendering ([dcc88d3](https://github.com/elixir-metatrack/plasmid/commit/dcc88d30d7031a4e589be3c9d8685372b7ea23d2))
+* add selectAll/deselectAll functionality and improve sample registration in Zustand store ([f0582f2](https://github.com/elixir-metatrack/plasmid/commit/f0582f2d77b3ee071dc4d2f36648e547c47fed13))
+* bring in shadcn/ui components for form ([5bbff8d](https://github.com/elixir-metatrack/plasmid/commit/5bbff8d405c17e13b5f3239236f3e65e9272e8c7))
+* display `area` in SampleLocationMap popup if available ([a5c1783](https://github.com/elixir-metatrack/plasmid/commit/a5c1783fea342e0bc6705bc1859c5105733e6330))
+* enhance sample table with select all/deselect all functionality and selection count display ([6da56aa](https://github.com/elixir-metatrack/plasmid/commit/6da56aa65c8f6939793301644e6978fa1b3af5e6))
+* enhance SampleLocationMap marker UI with redesigned styles and alias display ([0d40ffd](https://github.com/elixir-metatrack/plasmid/commit/0d40ffdf21ffaf1b1a32756bae235b7d00b633e6))
+* extend `samples` schema with `physicalCoordinates` and `source` fields ([9c5f4ad](https://github.com/elixir-metatrack/plasmid/commit/9c5f4adcc34d7211febe98ebcb477f2b25c1475a))
+* implement `SamplesTable` component with sorting, filtering, and pagination ([649db8b](https://github.com/elixir-metatrack/plasmid/commit/649db8b405d7eff6e3737babb5e5c88bdec106ee))
+* Initalize map with all samples pre-selected ([b753e8f](https://github.com/elixir-metatrack/plasmid/commit/b753e8f14e1878494d0a8a44ef687b9b7cd3b494))
+* integrate admin plugin with better-auth ([cf959b4](https://github.com/elixir-metatrack/plasmid/commit/cf959b4104552d0a98b6e58becf32af5ed70e581))
+* integrate better-auth and setup signup and signin pages ([bbbd7c4](https://github.com/elixir-metatrack/plasmid/commit/bbbd7c47a0600fdc85795a2ad4c7ec3c7397db8c))
+* integrate React Query with QueryClient and add development devtools ([3b40abd](https://github.com/elixir-metatrack/plasmid/commit/3b40abd38be2ba1c40396a6299c3a37f582fd3ed))
+* integrate SampleLocationMap into dashboard page ([b2fd826](https://github.com/elixir-metatrack/plasmid/commit/b2fd826cfd5fce0b36e72480ba8e372d1bc83fb3))
+* integrate SampleLocationMap into dashboard page ([a43271f](https://github.com/elixir-metatrack/plasmid/commit/a43271f5d42c8bf407e7c451ff2ac6558a0ca300))
+* move database to public view and disable signUp ([58b2ce7](https://github.com/elixir-metatrack/plasmid/commit/58b2ce7408b941cbd77b82b02c22aea1c7c64794))
+* redesign homepage with streamlined layout and navigation to dashboard ([e05b95e](https://github.com/elixir-metatrack/plasmid/commit/e05b95ee78d6b30271c75667eda96a15e950ce3c))
+* render a Map to show the location of selected samples ([9b510b3](https://github.com/elixir-metatrack/plasmid/commit/9b510b3f3cb32db22f5278029536ce715c3be778))
+* the seed script now deletes existing samples and repopulates the dataset ([f3d9c27](https://github.com/elixir-metatrack/plasmid/commit/f3d9c276dae8c4e741c9a1679b4ac8a89a81c872))
+* update homepage title to "A3Gen Sediment Database" ([86d9ba2](https://github.com/elixir-metatrack/plasmid/commit/86d9ba26d272d537f73dca9479117ceb9884d9ef))
+* update homepage title to "A3Gen Sediment Database" ([5d460ca](https://github.com/elixir-metatrack/plasmid/commit/5d460caaa990feb1cb443f4fad1cd399c3f9dfb9))
+* update seed file to map new `area` column in samples data ([e431b5e](https://github.com/elixir-metatrack/plasmid/commit/e431b5e3a3670af28233ec08f4ad6ad0c626024a))
+
+
+### Bug Fixes
+
+* correct latitude and longitute values ([4532396](https://github.com/elixir-metatrack/plasmid/commit/45323964b7823f42dd878d0c9aaa828d3a40eec4))
+* fixes release please config ([f2c7610](https://github.com/elixir-metatrack/plasmid/commit/f2c761082766454eb640e668adfc5c0683510f7d))
+* optimize rendering of map ([804c911](https://github.com/elixir-metatrack/plasmid/commit/804c911eb47b0e69bc894771dbfc65c7ade886bd))
+* remove `changelog-type` from release config ([84dc1d2](https://github.com/elixir-metatrack/plasmid/commit/84dc1d27d0e34aa05ca647fcda9decef9a873970))
