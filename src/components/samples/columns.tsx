@@ -103,6 +103,7 @@ export const DEFAULT_HIDDEN_COLUMNS = [
   "longitudeUnit",
   "physicalCoordinates",
   "higherGeography",
+  "area",
   "elevation",
   "depth",
   "samplingProtocol",
@@ -191,6 +192,10 @@ export function buildColumns({
     }),
     helper.accessor("higherGeography", {
       header: sortableHeader("Higher geography"),
+      cell: (info) => formatText(info.getValue()),
+    }),
+    helper.accessor("area", {
+      header: sortableHeader("Area"),
       cell: (info) => formatText(info.getValue()),
     }),
     helper.accessor("elevation", {
