@@ -84,6 +84,9 @@ export function SampleLocationMap() {
                   {sample.collectionDate}
                 </p>
               ) : null}
+              {sample.area ? (
+                <p className="text-muted-foreground text-xs">{sample.area}</p>
+              ) : null}
             </div>
           </MapPopup>
         ) : null}
