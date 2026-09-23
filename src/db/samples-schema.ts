@@ -19,6 +19,7 @@ export const samples = pgTable("samples", {
   physicalCoordinates: text("physical_coordinates"),
   countryCode: text("country_code"),
   higherGeography: text("higher_geography"),
+  area: text("area"),
   elevation: doublePrecision("elevation"),
   elevationUnit: text("elevation_unit"),
   depth: doublePrecision("depth"),
