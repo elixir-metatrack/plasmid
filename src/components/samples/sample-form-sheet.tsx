@@ -57,6 +57,7 @@ const SECTIONS: { title: string; fields: FieldConfig[] }[] = [
       { name: "locality", label: "Locality" },
       { name: "countryCode", label: "Country code" },
       { name: "higherGeography", label: "Higher geography" },
+      { name: "area", label: "Area" },
       { name: "latitude", label: "Latitude" },
       { name: "latitudeUnit", label: "Latitude unit" },
       { name: "longitude", label: "Longitude" },
