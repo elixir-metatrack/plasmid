@@ -129,6 +129,12 @@ export default function SignInPage() {
             </form.Subscribe>
           </FieldGroup>
         </form>
+        <p className="mt-4 text-center text-sm text-muted-foreground">
+          Don't have an account?{" "}
+          <Link href="/sign-up" className="underline underline-offset-4">
+            Sign up
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
