@@ -65,18 +65,18 @@ A sample-management web application for geological core samples (sediment cores,
 
 ## Scripts
 
-| Script | Description |
-| --- | --- |
-| `pnpm dev` | Start the development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Run the production server |
-| `pnpm lint` | Check code with Biome |
-| `pnpm format` | Format code with Biome |
-| `pnpm db:push` | Push the Drizzle schema to the database |
-| `pnpm db:generate` | Generate SQL migrations |
-| `pnpm db:migrate` | Apply migrations |
-| `pnpm db:studio` | Open Drizzle Studio |
-| `pnpm db:seed` | Seed the database from `sample_data.csv` |
+| Script             | Description                              |
+| ------------------ | ---------------------------------------- |
+| `pnpm dev`         | Start the development server             |
+| `pnpm build`       | Build for production                     |
+| `pnpm start`       | Run the production server                |
+| `pnpm lint`        | Check code with Biome                    |
+| `pnpm format`      | Format code with Biome                   |
+| `pnpm db:push`     | Push the Drizzle schema to the database  |
+| `pnpm db:generate` | Generate SQL migrations                  |
+| `pnpm db:migrate`  | Apply migrations                         |
+| `pnpm db:studio`   | Open Drizzle Studio                      |
+| `pnpm db:seed`     | Seed the database from `sample_data.csv` |
 
 ## Commits and Releases
 
