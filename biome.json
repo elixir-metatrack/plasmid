@@ -16,6 +16,7 @@
       "!.agents",
       "!.junie",
       "!**/*.svg",
+      "!CHANGELOG.md",
       "!src/components/ui/map.tsx"
     ]
   },
