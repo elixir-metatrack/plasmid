@@ -19,7 +19,7 @@ export type ActionResult =
 
 async function requireAdmin(): Promise<Session | null> {
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session || session.user.role !== "admin") {
+  if (session?.user.role !== "admin") {
     return null;
   }
   return session;
