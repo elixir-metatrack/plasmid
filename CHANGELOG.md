@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/elixir-metatrack/plasmid/compare/plasmid-v0.2.0...plasmid-v0.3.0) (2026-10-28)
+
+
+### Features
+
+* add sign-up page with form validation and enable user registration ([3d91e3c](https://github.com/elixir-metatrack/plasmid/commit/3d91e3c0a80c49050d9befcb9d837a36771c8565))
+
 ## [0.2.0](https://github.com/elixir-metatrack/plasmid/compare/plasmid-v0.1.0...plasmid-v0.2.0) (2026-09-23)
 
 
